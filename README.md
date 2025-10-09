@@ -78,10 +78,10 @@ Anim(アニメ番号, 枚数番号).XXX()でアクセス可能な関数<br>
 #使用例<br>
 <br>
 // アニメ5300番, 0Elem目のSpriteIDを取得<br>
-AirFileManager.Anim(5300, 0).SpriteID();<br>
+ReadAirFile::Anim(5300, 0).SpriteID();<br>
 <br>
 // アニメ5300番のLoopstart設定を取得<br>
-AirFileManager.Anim(5300).Loop();<br>
+ReadAirFile::Anim(5300).Loop();<br>
 <br>
 <br>
 <br>
