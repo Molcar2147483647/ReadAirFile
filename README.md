@@ -26,21 +26,21 @@ Airファイル読み込み方法<br>
 　bool LoadAirFile("XXX.air") // 対象ファイルを読み込み(true:読み込み成功, false:読み込み失敗)<br>
 <br>
 各アニメ番号へのアクセスで使用する関数<br>
-　参照 Anim(アニメ番号).XXX()　　　　　 // アニメ番号の情報<br>
+　参照 Anim(アニメ番号).XXX()　　　　　// アニメ番号の情報<br>
 　参照 Anim(アニメ番号, 枚数番号).XXX() // アニメ番号と枚数番目の情報<br>
 <br>
 Anim(アニメ番号).XXX()でアクセス可能な関数<br>
 　参照 Elem(枚数番号) // 枚数番号の情報の参照<br>
-　int ID()　　　　　　// 現在参照中のアニメ番号(0～2147483647)<br>
+　int ID()　　　　　　 // 現在参照中のアニメ番号(0～2147483647)<br>
 　bool Loop()　　　　 // ループ設定検知(false:ループ設定なし, true:ループ設定有り)<br>
 　int LoopElem()　　　// ループ始点Elem(0～2147483647)<br>
 <br>
 Anim(アニメ番号, 枚数番号).XXX()でアクセス可能な関数<br>
-　int SpriteID()　　 // 画像識別番号xxx, YYYのxxxの部分(0～32767)<br>
+　int SpriteID()　　 　// 画像識別番号xxx, YYYのxxxの部分(0～32767)<br>
 　int SpriteNumber() // 画像識別番号xxx, YYYのYYYの部分(0～32767)<br>
-　double PosX()　　　// 座標X(-2147483648～2147483647)<br>
-　double PosY()　　　// 座標Y(-2147483648～2147483647)<br>
-　int Time()　　　　 // Elem表示時間(-2147483648～2147483647)<br>
+　double PosX()　　 // 座標X(-2147483648～2147483647)<br>
+　double PosY()　　 // 座標Y(-2147483648～2147483647)<br>
+　int Time()　　　　  // Elem表示時間(-2147483648～2147483647)<br>
 　bool Facing()　　　// 左右向き反転(反転なし:false, 判定有り:true)<br>
 　bool VFacing()　　 // 上下向き反転(反転なし:false, 判定有り:true)<br>
 　int AlphaA()　　　 // 透過設定Aの値(0～255)<br>
