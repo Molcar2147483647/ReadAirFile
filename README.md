@@ -160,6 +160,285 @@ air.GetAnimData(XXX).GetElemData(YYY).PosX(); // アニメ番号XXXのYYY枚目�
 ```
 戻り値 int32_t PosX X座標
 
+### Y座標の取得
+SAEで設定したY座標を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).PosY(); // アニメ番号XXXのYYY枚目のY座標を取得
+```
+戻り値 int32_t PosY Y座標
+
+### フレーム表示時間座標の取得
+SAEで設定したフレーム表示時間を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).ElemTime(); // アニメ番号XXXのYYY枚目のフレーム表示時間を取得
+```
+戻り値 int32_t ElemTime フレーム表示時間
+
+### 水平方向の取得
+SAEで設定した水平方向を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).Facing(); // アニメ番号XXXのYYY枚目の水平方向を取得
+```
+戻り値 int32_t Facing 水平方向 (1 = 正方向： -1 = 負方向)
+
+### 垂直方向の取得
+SAEで設定した垂直方向を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).VFacing(); // アニメ番号XXXのYYY枚目の垂直方向を取得
+```
+戻り値 int32_t VFacing 垂直方向 (1 = 正方向： -1 = 負方向)
+
+### アルファ値Aの取得
+SAEで設定したアルファ値Aを返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).AlphaA(); // アニメ番号XXXのYYY枚目のアルファ値Aを取得
+```
+戻り値 int32_t AlphaA アルファ値A
+
+### アルファ値Sの取得
+SAEで設定したアルファ値Sを返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).AlphaS(); // アニメ番号XXXのYYY枚目のアルファ値Sを取得
+```
+戻り値 int32_t AlphaS アルファ値S
+
+### アルファ値Dの取得
+SAEで設定したアルファ値Dを返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).AlphaD(); // アニメ番号XXXのYYY枚目のアルファ値Dを取得
+```
+戻り値 int32_t AlphaD アルファ値D
+
+## class SAELib::AIRConfig
+### エラー出力切り替え設定/取得
+このライブラリ関数で発生したエラーを例外として投げるかログとして記録するかを指定できます  
+```
+SAELib::AIRConfig::SetThrowError(bool flag); // エラー出力切り替え設定
+```
+引数1 bool (false = ログとして記録する：true = 例外を投げる)  
+戻り値 なし(void)  
+```
+SAELib::AIRConfig::GetThrowError(); // エラー出力切り替え設定を取得
+```
+戻り値 bool (false = ログとして記録する：true = 例外を投げる)
+
+### エラーログファイルを作成設定/取得
+このライブラリ関数で発生したエラーのログファイルを出力するかどうか指定できます  
+```
+SAELib::AIRConfig::SetCreateLogFile(bool flag); // エラーログファイルを作成設定
+```
+引数1 bool (false = ログファイルを出力しない：true = ログファイルを出力する)  
+戻り値 なし(void)  
+```
+SAELib::AIRConfig::GetCreateLogFile(); // エラーログファイルを作成設定を取得  
+```
+戻り値 bool (false = ログファイルを出力しない：true = ログファイルを出力する)    
+
+### SAELibフォルダを作成設定/取得
+ファイルの出力先としてSAELibファイルを使用するかを指定できます  
+```
+SAELib::AIRConfig::SetCreateSAELibFile(bool flag, const std::string& Path = ""); // SAELibフォルダを作成設定
+```
+引数1 bool (false = SAELibファイルを使用しない：true = SAELibファイルを使用する)  
+引数2 const std::string& SAELibフォルダ作成先(省略時はパスの設定なし)  
+戻り値 なし(void)  
+```
+SAELib::AIRConfig::GetCreateSAELibFile(); // SAELibフォルダを作成設定を取得  
+```
+戻り値 const std::string& CreateSAELibFile SAELibフォルダ作成先  
+
+### SAELibフォルダのパス設定/取得
+SAELibファイルの作成パスを指定できます  
+```
+SAELib::AIRConfig::SetSAELibFilePath(const std::string& Path = ""); // SAELibフォルダのパス設定
+```
+引数1 const std::string& SAELibFilePath SAELibフォルダ作成先  
+戻り値 なし(void)  
+```
+SAELib::AIRConfig::GetSAELibFilePath(); // SAELibフォルダを作成パス取得  
+```
+戻り値 const std::string& SAELibFilePath SAELibフォルダ作成先  
+
+### AIRファイルの検索パス設定/取得
+AIRファイルの検索先のパスを指定できます  
+AIRコンストラクタもしくはLoadAIR関数で検索先のパスを指定しない場合、この設定のパスで検索します  
+```
+SAELib::AIRConfig::SetAIRSearchPath(const std::string& Path = ""); // AIRファイルの検索パス設定  
+```
+引数1 const std::string& AIRSearchPath AIRファイルの検索先のパス  
+戻り値 なし(void)  
+```
+SAELib::AIRConfig::GetSFFSearchPath(); // SFFファイルの検索パス取得  
+```
+戻り値 const std::string& AIRSearchPath AIRファイルの検索先のパス  
+
+## namespace SAELib::AIRError
+### エラーID情報  
+このライブラリが出力するエラーIDのenumです  
+```
+enum ErrorID : int32_t {
+  InvalidAIRExtension,
+  LoadAIRInvalidPath,
+  AIRSearchInvalidPath,
+  AIRFileNotFound,
+  AIRFileSizeOver,
+  EmptyAIRFilePath,
+  OpenAIRFileFailed,
+  DuplicateAnimNumber,
+  AnimNumberNotFound,
+  AnimIndexNotFound,
+  SAELibFolderInvalidPath,
+  CreateSAELibFolderFailed,
+  CreateErrorLogFileFailed,
+  WriteErrorLogFileFailed,
+  CloseErrorLogFileFailed,
+  AnimNumberOutOfRange,
+  SpriteGroupNoOutOfRange,
+  SpriteImageNoOutOfRange,
+  ElemPosXOutOfRange,
+  ElemPosYOutOfRange,
+  ElemTimeOutOfRange,
+  ElemAlphaAOutOfRange,
+  ElemAlphaSOutOfRange,
+  ElemAlphaDOutOfRange,
+  EmptyAnimElem,
+  AirFileReadFailed,
+  FromCharsConvertFailed,
+};
+```
+
+### エラー情報配列
+このライブラリが出力するエラー情報の配列です  
+```
+struct T_ErrorInfo {
+public:
+  const int32_t ID;
+  const char* const Name;
+  const char* const Message;
+};
+      
+constexpr T_ErrorInfo ErrorInfo[] = {
+  { InvalidAIRExtension,			"InvalidAIRExtension",			"ファイルの拡張子が.airではありません" },
+  { LoadAIRInvalidPath,			"LoadAIRInvalidPath",			"AIRファイル読み込み関数のパスが正しくありません" },
+  { AIRSearchInvalidPath,			"AIRSearchInvalidPath",			"AIRファイル検索フォルダのパスが正しくありません" },
+  { AIRFileNotFound,				"AIRFileNotFound",				"AIRファイルが見つかりません" },
+  { AIRFileSizeOver,				"AIRFileSizeOver",				"AIRファイルサイズが許容値を超えています" },
+  { EmptyAIRFilePath,				"EmptyAIRFilePath",				"AIRファイルパスが指定されていません" },
+  { OpenAIRFileFailed,			"OpenAIRFileFailed",			"AIRファイルが開けませんでした" },
+  { DuplicateAnimNumber,			"DuplicateAnimNumber",			"アニメリストの番号が重複しています" },
+  { AnimNumberNotFound,			"AnimNumberNotFound",			"指定した番号がアニメリストから見つかりません" },
+  { AnimIndexNotFound,			"AnimIndexNotFound",			"指定したインデックスがアニメリストから見つかりません" },
+  { SAELibFolderInvalidPath,		"SAELibFolderInvalidPath",		"SAELibフォルダのパスが正しくありません" },
+  { CreateSAELibFolderFailed,		"CreateSAELibFolderFailed",		"SAELibフォルダの作成に失敗しました" },
+  { CreateErrorLogFileFailed,		"CreateErrorLogFileFailed",		"エラーログファイルの作成に失敗しました" },
+  { WriteErrorLogFileFailed,		"WriteErrorLogFileFailed",		"エラーログファイルへの書き込みに失敗しました" },
+  { CloseErrorLogFileFailed,		"CloseErrorLogFileFailed",		"エラーログファイルへの書き込みが正常に終了しませんでした" },
+  { AnimNumberOutOfRange,			"AnimNumberOutOfRange",			"アニメーション番号が登録可能な数値の範囲(0～2147483647)ではありません" },
+  { SpriteGroupNoOutOfRange,		"SpriteGroupNoOutOfRange",		"グループ番号が登録可能な数値の範囲(-1～65535)ではありません" },
+  { SpriteImageNoOutOfRange,		"SpriteImageNoOutOfRange",		"イメージ番号が登録可能な数値の範囲(-1～65535)ではありません" },
+  { ElemPosXOutOfRange,			"ElemPosXOutOfRange",			"X座標が登録可能な数値の範囲(-2147483648～2147483647)ではありません" },
+  { ElemPosYOutOfRange,			"ElemPosYOutOfRange",			"Y座標が登録可能な数値の範囲(-2147483648～2147483647)ではありません" },
+  { ElemTimeOutOfRange,			"ElemTimeOutOfRange",			"アニメタイマーが登録可能な数値の範囲(-2147483648～2147483647)ではありません" },
+  { ElemAlphaAOutOfRange,			"ElemAlphaAOutOfRange",			"AlphaAが登録可能な数値の範囲(0～256)ではありません" },
+  { ElemAlphaSOutOfRange,			"ElemAlphaSOutOfRange",			"AlphaSが登録可能な数値の範囲(0～256)ではありません" },
+  { ElemAlphaDOutOfRange,			"ElemAlphaDOutOfRange",			"AlphaDが登録可能な数値の範囲(0～256)ではありません" },
+  { EmptyAnimElem,				"EmptyAnimElem",				"アニメーション内容が登録されていません" },
+  { AirFileReadFailed,			"AirFileReadFailed",			"AIRファイルの読み取り中にエラーが発生しました" },
+  { FromCharsConvertFailed,		"FromCharsConvertFailed",		"取得した文字列の変換に失敗しました" },
+};
+
+```
+
+### エラー情報のサイズ取得
+エラー情報の配列サイズを取得します　　
+```
+SAELib::AIRError::ErrorInfoSize; // エラー情報配列サイズ
+```
+戻り値 size_t ErrorInfoSize エラー情報配列サイズ
+
+### エラー名取得
+エラーIDに応じたエラー名を取得します  
+```
+SAELib::AIRError::ErrorName(ErrorID); // ErrorIDのエラー名を取得
+```
+引数1 int32_t ErrorID エラーID  
+戻り値 const char* ErrorName エラー名  
+
+### エラーメッセージ取得
+エラーIDに応じたエラーメッセージを取得します  
+```
+SAELib::AIRError::ErrorMessage(ErrorID); // ErrorIDのエラーメッセージを取得
+```
+引数1 int32_t ErrorID エラーID  
+戻り値 const char* ErrorMessage エラーメッセージ  
+
+## 使用例
+```
+#include "h_ReadAirFile.h"
+#include <iostream> // 標準入力/出力
+
+int main()
+{
+	SAELib::AIRConfig::SetThrowError(false);		// このライブラリで発生したエラーを例外として処理しない
+	SAELib::AIRConfig::SetCreateSAELibFile(false);	// SAELibファイルの作成を許可する
+	SAELib::AIRConfig::SetSAELibFilePath();			// SAELibファイルの作成階層を指定
+	SAELib::AIRConfig::SetCreateLogFile(false);		// このライブラリで発生したエラーログの作成を許可する
+	SAELib::AIRConfig::SetAIRSearchPath("../../");	// AIRファイルの検索開始階層を指定
+
+	// kfmのairファイルを読み込む
+	SAELib::AIR air("kfm");
+
+	// アニメ番号5150が存在するか確認
+	if (air.ExistAnimNumber(5150)) {
+		// アニメ番号5150の1枚目の画像番号を取得
+		air.GetAnimData(5150).GetElemData(1).GroupNo();
+		air.GetAnimData(5150).GetElemData(1).ImageNo();
+	}
+
+	// すべてのアニメ情報を出力
+	for (int32_t AnimIndex = 0; air.NumAnim() > AnimIndex; ++AnimIndex) {
+		std::cout << "\nExist: " << air.ExistAnimDataIndex(AnimIndex) << std::endl;
+		std::cout << "Number: " << air.GetAnimDataIndex(AnimIndex).AnimNumber() << std::endl;
+		std::cout << "Loopstart: " << air.GetAnimDataIndex(AnimIndex).Loopstart() << std::endl;
+		std::cout << "ElemDataSize: " << air.GetAnimDataIndex(AnimIndex).ElemDataSize() << std::endl;
+		for (int32_t i = 0; i < air.GetAnimDataIndex(AnimIndex).ElemDataSize(); ++i) {
+			std::cout << "\nElem: " << i << std::endl;
+			std::cout << "GroupNo: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).GroupNo() << std::endl;
+			std::cout << "ImageNo: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).ImageNo() << std::endl;
+			std::cout << "PosX: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).PosX() << std::endl;
+			std::cout << "PosY: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).PosY() << std::endl;
+			std::cout << "ElemTime: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).ElemTime() << std::endl;
+			std::cout << "Facing: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).Facing() << std::endl;
+			std::cout << "VFacing: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).VFacing() << std::endl;
+			std::cout << "AlphaA: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).AlphaA() << std::endl;
+			std::cout << "AlphaS: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).AlphaS() << std::endl;
+			std::cout << "AlphaD: " << air.GetAnimDataIndex(AnimIndex).GetElemData(i).AlphaD() << std::endl;
+		}
+	}
+
+	// 存在しない番号はダミーデータに
+	std::cout << air.GetAnimData(-666).GetElemData(-666).IsDummy() << std::endl;
+
+	return 0;
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
