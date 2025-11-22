@@ -107,7 +107,7 @@ SAEで設定したループ開始位置を返します
 ```
 air.GetAnimData(XXX).Loopstart(); // ループ開始位置
 ```
-戻り値 int32_t Loopstart ループ開始位置  
+戻り値 int32_t Loopstart ループ開始位置 (0 = ループなし, 1 >= ループ開始位置)  
 
 ### アニメ枚数の取得
 SAEで設定したアニメ枚数を返します  
