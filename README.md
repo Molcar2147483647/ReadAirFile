@@ -127,5 +127,45 @@ air.GetAnimData(XXX).GetElemData(YYY); // アニメ番号XXXのYYY枚数目の�
 戻り値1 対象が存在する GetElemData(index)のデータ  
 戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
+## class SAELib::AIR::ElemData
+### ダミーデータ判断
+自身がダミーデータであるかを確認します  
+AIRConfig::SetThrowErrorの設定がOFFの場合にエラー回避のために使用されます  
+```
+air.GetAnimData(XXX).GetElemData(YYY).IsDummy(); // ダミーデータ判断
+```
+戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ))  
+
+### グループ番号の取得
+SAEで設定したグループ番号を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).GroupNo(); // アニメ番号XXXのYYY枚目のグループ番号を取得
+```
+戻り値 int32_t GroupNo グループ番号
+
+### イメージ番号の取得
+SAEで設定したイメージ番号を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).ImageNo(); // アニメ番号XXXのYYY枚目のイメージ番号を取得
+```
+戻り値 int32_t ImageNo イメージ番号
+
+### X座標の取得
+SAEで設定したX座標を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).GetElemData(YYY).PosX(); // アニメ番号XXXのYYY枚目のX座標を取得
+```
+戻り値 int32_t PosX X座標
+
+
+
+
+
+
+
+
 
 
