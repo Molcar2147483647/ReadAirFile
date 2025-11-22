@@ -15,7 +15,10 @@ C++言語標準：ISO C++17標準
 インスタンスを生成して使用する  
 
 ### class SAELib::AIR::AnimData
-格納されたデータのパラメータを取得する際に使用するクラス  
+格納されたデータのAnimパラメータを取得する際に使用するクラス  
+
+### class SAELib::AIR::ElemData
+格納されたデータのElemパラメータを取得する際に使用するクラス  
 
 ### class SAELib::AIRConfig
 ReadAirFileライブラリの動作設定が可能  
@@ -81,13 +84,48 @@ air.GetAnimDataIndex(0); // 0番目のデータを取得
 戻り値1 対象が存在する GetAnimDataIndex(index)のデータ  
 戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
+## class SAELib::AIR::AnimData
+### ダミーデータ判断
+自身がダミーデータであるかを確認します  
+AIRConfig::SetThrowErrorの設定がOFFの場合にエラー回避のために使用されます  
+```
+air.GetAnimData(XXX).IsDummy(); // ダミーデータ判断
+```
+戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ))  
 
+### アニメ番号の取得
+SAEで設定したアニメ番号を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).AnimNumber(); // アニメ番号を取得
+```
+戻り値 int32_t AnimNumber アニメ番号 
 
+### ループ開始位置の取得
+SAEで設定したループ開始位置を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).Loopstart(); // ループ開始位置
+```
+戻り値 int32_t Loopstart ループ開始位置  
 
+### アニメ枚数の取得
+SAEで設定したアニメ枚数を返します  
+ダミーデータの場合は 0 を返します  
+```
+air.GetAnimData(XXX).ElemDataSize(); // アニメ枚数
+```
+戻り値 int32_t ElemDataSize アニメ枚数  
 
-
-
-
+### 指定インデックスのデータへアクセス
+AIRデータへ指定したインデックスでアクセスします  
+対象が存在しない場合はAIRConfig::SetThrowErrorの設定に準拠します  
+```
+air.GetAnimData(XXX).GetElemData(YYY); // アニメ番号XXXのYYY枚数目のデータを取得
+```
+引数1 int32_t index データ配列インデックス  
+戻り値1 対象が存在する GetElemData(index)のデータ  
+戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
 
 
