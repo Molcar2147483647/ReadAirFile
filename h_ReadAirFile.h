@@ -1416,5 +1416,6 @@ namespace SAELib {
 		* @return const std::filesystem::path& AIRファイルの検索パス
 		*/
 		inline const std::filesystem::path& GetAIRSearchPath() { return ReadAirFile_detail::T_Config::Instance().AIRSearchPath(); }
-	}} // namespace SAELib
+	}
+} // namespace SAELib
 #endif
