@@ -107,7 +107,7 @@ SAEで設定したアニメのループ開始位置が存在するかを確認�
 ```
 air.GetAnimData(XXX).ExistLoopstart(); // ループ開始位置の存在確認
 ```
-戻り値 int32_t Loopstart ループ開始位置 (0 = ループなし, 1 >= ループ開始位置)  
+戻り値 bool 判定結果 (false = 存在なし : true = 存在あり)
 
 ### ループ開始位置の取得
 SAEで設定したアニメのループ開始位置を返します  
@@ -115,7 +115,7 @@ SAEで設定したアニメのループ開始位置を返します
 ```
 air.GetAnimData(XXX).ElemLoopstart(); // ループ開始位置の取得
 ```
-戻り値 int32_t Loopstart ループ開始位置 (0 = ループなし, 1 >= ループ開始位置)  
+戻り値 int32_t ElemLoopstart ループ開始位置
 
 ### アニメ枚数の取得
 SAEで設定したアニメ枚数を返します  
