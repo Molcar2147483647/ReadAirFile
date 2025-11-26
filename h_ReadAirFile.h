@@ -1086,9 +1086,11 @@ namespace SAELib {
 				*
 				* 　SAEで設定したアニメのループ開始位置が存在するかを確認します
 				*
+				* 　ダミーデータの場合は false を返します
+				*
 				* @return bool 判定結果 (false = 存在なし : true = 存在あり)
 				*/
-				bool ExistLoopstart() const noexcept { return (IsDummy() ? 0 : ParamRef().ExistLoopstart()); }
+				bool ExistLoopstart() const noexcept { return (IsDummy() ? false : ParamRef().ExistLoopstart()); }
 
 				/**
 				* @brief ループ開始位置の取得
