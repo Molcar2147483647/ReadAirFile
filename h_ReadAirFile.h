@@ -51,6 +51,8 @@ namespace SAELib {
 			static constexpr T_Bit kElemAlphaD = T_Bit(20, 511);
 			static constexpr T_Bit kDummySpriteGroupNo = T_Bit(29, 1);
 			static constexpr T_Bit kDummySpriteImageNo = T_Bit(30, 1);
+			static constexpr T_Bit kElemLoopStart = T_Bit(0, 2147483647);
+			static constexpr T_Bit kExistLoopStart = T_Bit(32, 1);
 
 		public:
 			[[nodiscard]] static constexpr int32_t EncodeSpriteNumber(int32_t GroupNo, int32_t ImageNo) noexcept {
@@ -60,6 +62,9 @@ namespace SAELib {
 				return kElemFacing.BitSet(Facing) | kElemVFacing.BitSet(VFacing) | 
 					kElemAlphaA.BitSet(AlphaA) | kElemAlphaS.BitSet(AlphaS) | kElemAlphaD.BitSet(AlphaD) | 
 					kDummySpriteGroupNo.BitSet(DummySpriteGroupNo) | kDummySpriteImageNo.BitSet(DummySpriteImageNo);
+			}
+			[[nodiscard]] static constexpr int32_t EncodeLoopStart(int32_t Elem, bool Exist) noexcept {
+				return kElemLoopStart.BitSet(Elem) | kExistLoopStart.BitSet(Exist);
 			}
 
 			[[nodiscard]] static constexpr int32_t DecodeSpriteGroupNo(int32_t SpriteNumber) noexcept { return kSpriteGroupNo.BitGet(SpriteNumber); }
@@ -71,6 +76,8 @@ namespace SAELib {
 			[[nodiscard]] static constexpr int32_t DecodeElemAlphaD(int32_t ExtraParam) noexcept { return kElemAlphaD.BitGet(ExtraParam); }
 			[[nodiscard]] static constexpr int32_t DecodeDummySpriteGroupNo(int32_t ExtraParam) noexcept { return kDummySpriteGroupNo.BitGet(ExtraParam); }
 			[[nodiscard]] static constexpr int32_t DecodeDummySpriteImageNo(int32_t ExtraParam) noexcept { return kDummySpriteImageNo.BitGet(ExtraParam); }
+			[[nodiscard]] static constexpr int32_t DecodeElemLoopStart(int32_t LoopStart) noexcept { return kElemLoopStart.BitGet(LoopStart); }
+			[[nodiscard]] static constexpr int32_t DecodeExistLoopStart(int32_t LoopStart) noexcept { return kExistLoopStart.BitGet(LoopStart); }
 		};
 
 		struct T_CheckRange {
@@ -454,14 +461,15 @@ namespace SAELib {
 				const int32_t kAnimNumber;		//
 				const ksize_t kElemDataStart;	//
 				const ksize_t kElemDataSize;	//
-				const ksize_t kLoopstart;		// 0 = ループなし, 0 > ループ開始枚数
+				const ksize_t kLoopstart;		// ループ開始枚数(2147483647), ループ存在判定(1)
 
 			public:
 				[[nodiscard]] int32_t AnimNumber() const noexcept { return kAnimNumber; }
 				[[nodiscard]] ksize_t ElemDataStart() const noexcept { return kElemDataStart; }
 				[[nodiscard]] ksize_t ElemDataSize() const noexcept { return kElemDataSize; }
-				[[nodiscard]] ksize_t Loopstart() const noexcept { return kLoopstart; }
-			
+				[[nodiscard]] ksize_t ElemLoopstart() const noexcept { return Convert::DecodeElemLoopStart(kLoopstart); }
+				[[nodiscard]] bool ExistLoopstart() const noexcept { return Convert::DecodeExistLoopStart(kLoopstart); }
+
 				T_AnimList(int32_t AnimNumber, ksize_t Loopstart, ksize_t ElemDataStart, ksize_t ElemDataSize)
 					: kAnimNumber(AnimNumber), kLoopstart(Loopstart), kElemDataStart(ElemDataStart), kElemDataSize(ElemDataSize) {
 				}
@@ -791,10 +799,10 @@ namespace SAELib {
 				int32_t TextLineCount = 0;
 				bool FoundAnimData = false;
 				bool FoundElemData = false;
-				ksize_t AnimNumber = 0;
-				ksize_t Loopstart = 0;
+				int32_t AnimNumber = 0;
+				int32_t Loopstart = 0;
 				ksize_t ElemStart = 0;
-				ksize_t ElemDataSize = 0;
+				int32_t ElemDataSize = 0;
 
 				while (File.good()) {
 					++TextLineCount;
@@ -816,8 +824,13 @@ namespace SAELib {
 						T_ActionBegin ActionBegin(RegexMatch, TextLineCount);
 
 						// アニメーション重複チェック
-						if (AnimNumberUMap.exist(ActionBegin.AnimNumber())) {
-							T_ErrorHandle::Instance().SetError(ErrorMessage::DuplicateAnimNumber, ActionBegin.AnimNumber(), TextLineCount);
+						if (ActionBegin.AnimNumber() < 0 || AnimNumberUMap.exist(ActionBegin.AnimNumber())) {
+							if (ActionBegin.AnimNumber() >= 0) {
+								T_ErrorHandle::Instance().SetError(ErrorMessage::DuplicateAnimNumber, ActionBegin.AnimNumber(), TextLineCount);
+							}
+							FoundAnimData = false;
+							FoundElemData = false;
+							ElemDataSize = 0;
 							continue;
 						}
 						AnimNumberUMap.Register(ActionBegin.AnimNumber());
@@ -826,17 +839,16 @@ namespace SAELib {
 						AnimNumber = ActionBegin.AnimNumber();
 						ElemStart = static_cast<ksize_t>(AirAnimData.ElemData().size());
 					}
-					else {
+					else if (FoundAnimData) {
 						// Loopstart検知
-						if (!Loopstart && std::regex_match(TextLine, AnimationDataLoop_re)) {
-							Loopstart = 1 + ElemDataSize;
+						if (!Convert::DecodeExistLoopStart(Loopstart) && std::regex_match(TextLine, AnimationDataLoop_re)) {
+							Loopstart = Convert::EncodeLoopStart(ElemDataSize, true);
 							continue;
 						}
 
 						// アニメーションパラメータの検索
 						if (!std::regex_match(TextLine, RegexMatch, AnimationDataParam_re)) { continue; }
 
-						FoundAnimData = false;
 						FoundElemData = true;
 						++ElemDataSize;
 						T_AnimParam AnimParam(RegexMatch, TextLineCount);
@@ -1070,15 +1082,24 @@ namespace SAELib {
 				int32_t AnimNumber() const noexcept { return (IsDummy() ? 0 : ParamRef().AnimNumber()); }
 
 				/**
+				* @brief ループ開始位置の存在確認
+				*
+				* 　SAEで設定したアニメのループ開始位置が存在するかを確認します
+				*
+				* @return bool 判定結果 (false = 存在なし : true = 存在あり)
+				*/
+				bool ExistLoopstart() const noexcept { return (IsDummy() ? 0 : ParamRef().ExistLoopstart()); }
+
+				/**
 				* @brief ループ開始位置の取得
 				*
-				* 　SAEで設定したループ開始位置を返します
+				* 　SAEで設定したアニメのループ開始位置を返します
 				*
 				* 　ダミーデータの場合は 0 を返します
 				*
-				* @return int32_t Loopstart ループ開始位置 (0 = ループなし, 1 >= ループ開始位置)
+				* @return int32_t ElemLoopstart ループ開始位置
 				*/
-				int32_t Loopstart() const noexcept { return (IsDummy() ? 0 : ParamRef().Loopstart()); }
+				int32_t ElemLoopstart() const noexcept { return (IsDummy() ? 0 : ParamRef().ElemLoopstart()); }
 
 				/**
 				* @brief アニメ枚数の取得
@@ -1229,7 +1250,7 @@ namespace SAELib {
 			* @return bool 検索結果 (false = 存在なし : true = 存在あり)
 			*/
 			bool ExistAnimDataIndex(int32_t AnimDataIndex) {
-				return AnimNumberUMap.size() > AnimDataIndex;
+				return AnimNumberUMap.size() > static_cast<ksize_t>(AnimDataIndex);
 			}
 
 			/**
