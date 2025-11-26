@@ -101,11 +101,19 @@ air.GetAnimData(XXX).AnimNumber(); // アニメ番号を取得
 ```
 戻り値 int32_t AnimNumber アニメ番号 
 
+### ループ開始位置の存在確認
+SAEで設定したアニメのループ開始位置が存在するかを確認します  
+ダミーデータの場合は false を返します  
+```
+air.GetAnimData(XXX).ExistLoopstart(); // ループ開始位置の存在確認
+```
+戻り値 int32_t Loopstart ループ開始位置 (0 = ループなし, 1 >= ループ開始位置)  
+
 ### ループ開始位置の取得
-SAEで設定したループ開始位置を返します  
+SAEで設定したアニメのループ開始位置を返します  
 ダミーデータの場合は 0 を返します  
 ```
-air.GetAnimData(XXX).Loopstart(); // ループ開始位置
+air.GetAnimData(XXX).ElemLoopstart(); // ループ開始位置の取得
 ```
 戻り値 int32_t Loopstart ループ開始位置 (0 = ループなし, 1 >= ループ開始位置)  
 
@@ -113,7 +121,7 @@ air.GetAnimData(XXX).Loopstart(); // ループ開始位置
 SAEで設定したアニメ枚数を返します  
 ダミーデータの場合は 0 を返します  
 ```
-air.GetAnimData(XXX).ElemDataSize(); // アニメ枚数
+air.GetAnimData(XXX).ElemDataSize(); // アニメ枚数の取得
 ```
 戻り値 int32_t ElemDataSize アニメ枚数  
 
@@ -406,7 +414,8 @@ int main()
 	for (int32_t AnimIndex = 0; air.NumAnim() > AnimIndex; ++AnimIndex) {
 		std::cout << "\nExist: " << air.ExistAnimDataIndex(AnimIndex) << std::endl;
 		std::cout << "Number: " << air.GetAnimDataIndex(AnimIndex).AnimNumber() << std::endl;
-		std::cout << "Loopstart: " << air.GetAnimDataIndex(AnimIndex).Loopstart() << std::endl;
+		std::cout << "ElemLoopstart: " << air.GetAnimDataIndex(AnimIndex).ElemLoopstart() << std::endl;
+		std::cout << "ExistLoopstart: " << air.GetAnimDataIndex(AnimIndex).ExistLoopstart() << std::endl;
 		std::cout << "ElemDataSize: " << air.GetAnimDataIndex(AnimIndex).ElemDataSize() << std::endl;
 		for (int32_t i = 0; i < air.GetAnimDataIndex(AnimIndex).ElemDataSize(); ++i) {
 			std::cout << "\nElem: " << i << std::endl;
