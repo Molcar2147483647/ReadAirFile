@@ -424,15 +424,14 @@ namespace SAELib {
 			[[nodiscard]] bool empty() const noexcept { return Path_.empty(); }
 		};
 
-
 		// スプライトリストの画像番号の重複チェック＆存在確認
 		struct T_UnorderedMap {
 		private:
-			std::unordered_map<int, int> UnorderedMap = {};
+			std::unordered_map<int32_t, int32_t> UnorderedMap = {};
 
 		public:
 			void Register(int32_t value) {
-				UnorderedMap[value] = static_cast<int>(UnorderedMap.size());
+				UnorderedMap[value] = static_cast<int32_t>(UnorderedMap.size());
 			}
 
 		public:
