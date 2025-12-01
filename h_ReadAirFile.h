@@ -1250,7 +1250,7 @@ namespace SAELib {
 			* @param int32_t index データ配列インデックス
 			* @return bool 検索結果 (false = 存在なし : true = 存在あり)
 			*/
-			bool ExistAnimDataIndex(int32_t AnimDataIndex) {
+			bool ExistAnimDataIndex(int32_t AnimDataIndex) const {
 				return static_cast<ksize_t>(AnimDataIndex) < AnimNumberUMap.size();
 			}
 
@@ -1265,7 +1265,7 @@ namespace SAELib {
 			* @retval 対象が存在する AnimData
 			* @retval 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)
 			*/
-			const AnimData GetAnimDataIndex(int32_t index) {
+			const AnimData GetAnimDataIndex(int32_t index) const {
 				if (ExistAnimDataIndex(index)) {
 					return AnimData(&AirAnimData, index);
 				}
