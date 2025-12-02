@@ -120,7 +120,7 @@ namespace SAELib {
 
 			static constexpr int32_t kThrowError = 1 << 0;
 			static constexpr int32_t kCreateLogFile = 1 << 1;
-			static constexpr int32_t kCreateSAELibFile = 2 << 1;
+			static constexpr int32_t kCreateSAELibFile = 1 << 2;
 			static constexpr int32_t kDefaultConfig = 0;
 
 			// SAELibファイルのパス
