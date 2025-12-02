@@ -210,7 +210,7 @@ namespace SAELib {
 				ElemAlphaSOutOfRange,
 				ElemAlphaDOutOfRange,
 				EmptyAnimElem,
-				AirFileReadFailed,
+				AIRFileReadFailed,
 				FromCharsConvertFailed,
 			};
 
@@ -247,7 +247,7 @@ namespace SAELib {
 				{ ElemAlphaSOutOfRange,			"ElemAlphaSOutOfRange",			"AlphaSが登録可能な数値の範囲(0～256)ではありません" },
 				{ ElemAlphaDOutOfRange,			"ElemAlphaDOutOfRange",			"AlphaDが登録可能な数値の範囲(0～256)ではありません" },
 				{ EmptyAnimElem,				"EmptyAnimElem",				"アニメーション内容が登録されていません" },
-				{ AirFileReadFailed,			"AirFileReadFailed",			"AIRファイルの読み取り中にエラーが発生しました" },
+				{ AIRFileReadFailed,			"AIRFileReadFailed",			"AIRファイルの読み取り中にエラーが発生しました" },
 				{ FromCharsConvertFailed,		"FromCharsConvertFailed",		"取得した文字列の変換に失敗しました" },
 			};
 
@@ -856,7 +856,7 @@ namespace SAELib {
 				}
 
 				if (File.bad() || File.fail() && !File.eof()) {
-					T_ErrorHandle::Instance().SetError(ErrorMessage::AirFileReadFailed);
+					T_ErrorHandle::Instance().SetError(ErrorMessage::AIRFileReadFailed);
 					return false;
 				}
 
