@@ -459,17 +459,17 @@ namespace SAELib {
 			private:
 				const int32_t kAnimNumber;		//
 				const ksize_t kElemDataStart;	//
-				const ksize_t kElemDataSize;	//
-				const ksize_t kLoopstart;		// ループ開始枚数(2147483647), ループ存在判定(1)
+				const int32_t kElemDataSize;	//
+				const int32_t kLoopstart;		// ループ開始枚数(2147483647), ループ存在判定(1)
 
 			public:
 				[[nodiscard]] int32_t AnimNumber() const noexcept { return kAnimNumber; }
 				[[nodiscard]] ksize_t ElemDataStart() const noexcept { return kElemDataStart; }
-				[[nodiscard]] ksize_t ElemDataSize() const noexcept { return kElemDataSize; }
-				[[nodiscard]] ksize_t ElemLoopstart() const noexcept { return Convert::DecodeElemLoopStart(kLoopstart); }
+				[[nodiscard]] int32_t ElemDataSize() const noexcept { return kElemDataSize; }
+				[[nodiscard]] int32_t ElemLoopstart() const noexcept { return Convert::DecodeElemLoopStart(kLoopstart); }
 				[[nodiscard]] bool ExistLoopstart() const noexcept { return Convert::DecodeExistLoopStart(kLoopstart); }
 
-				T_AnimList(int32_t AnimNumber, ksize_t Loopstart, ksize_t ElemDataStart, ksize_t ElemDataSize)
+				T_AnimList(int32_t AnimNumber, int32_t Loopstart, ksize_t ElemDataStart, int32_t ElemDataSize)
 					: kAnimNumber(AnimNumber), kLoopstart(Loopstart), kElemDataStart(ElemDataStart), kElemDataSize(ElemDataSize) {
 				}
 			};
@@ -510,7 +510,7 @@ namespace SAELib {
 			[[nodiscard]] const T_AnimList& AnimList(ksize_t index) const noexcept { return AnimList_[index]; }
 			[[nodiscard]] const T_ElemData& ElemData(ksize_t index) const noexcept { return ElemData_[index]; }
 
-			void AddAnimList(int32_t AnimNumber, ksize_t Loopstart, ksize_t ElemDataStart, ksize_t ElemDataSize) {
+			void AddAnimList(int32_t AnimNumber, int32_t Loopstart, ksize_t ElemDataStart, int32_t ElemDataSize) {
 				AnimList_.emplace_back(T_AnimList(AnimNumber, Loopstart, ElemDataStart, ElemDataSize));
 			}
 
