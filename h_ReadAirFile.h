@@ -42,42 +42,42 @@ namespace SAELib {
 
 		struct Convert {
 		private:
-			static constexpr T_Bit kSpriteGroupNo = T_Bit(0, 65535);
-			static constexpr T_Bit kSpriteImageNo = T_Bit(16, 65535);
-			static constexpr T_Bit kElemFacing = T_Bit(0, 1);
-			static constexpr T_Bit kElemVFacing = T_Bit(1, 1);
-			static constexpr T_Bit kElemAlphaA = T_Bit(2, 511);
-			static constexpr T_Bit kElemAlphaS = T_Bit(11, 511);
-			static constexpr T_Bit kElemAlphaD = T_Bit(20, 511);
-			static constexpr T_Bit kDummySpriteGroupNo = T_Bit(29, 1);
-			static constexpr T_Bit kDummySpriteImageNo = T_Bit(30, 1);
-			static constexpr T_Bit kElemLoopStart = T_Bit(0, 2147483647);
-			static constexpr T_Bit kExistLoopStart = T_Bit(32, 1);
+			inline static constexpr T_Bit kSpriteGroupNo = T_Bit(0, 65535);
+			inline static constexpr T_Bit kSpriteImageNo = T_Bit(16, 65535);
+			inline static constexpr T_Bit kElemFacing = T_Bit(0, 1);
+			inline static constexpr T_Bit kElemVFacing = T_Bit(1, 1);
+			inline static constexpr T_Bit kElemAlphaA = T_Bit(2, 511);
+			inline static constexpr T_Bit kElemAlphaS = T_Bit(11, 511);
+			inline static constexpr T_Bit kElemAlphaD = T_Bit(20, 511);
+			inline static constexpr T_Bit kDummySpriteGroupNo = T_Bit(29, 1);
+			inline static constexpr T_Bit kDummySpriteImageNo = T_Bit(30, 1);
+			inline static constexpr T_Bit kElemLoopStart = T_Bit(0, 2147483647);
+			inline static constexpr T_Bit kExistLoopStart = T_Bit(32, 1);
 
 		public:
-			[[nodiscard]] static constexpr int32_t EncodeSpriteNumber(int32_t GroupNo, int32_t ImageNo) noexcept {
+			[[nodiscard]] inline static constexpr int32_t EncodeSpriteNumber(int32_t GroupNo, int32_t ImageNo) noexcept {
 				return kSpriteGroupNo.BitSet(GroupNo) | kSpriteImageNo.BitSet(ImageNo);
 			}
-			[[nodiscard]] static constexpr int32_t EncodeAnimExtraParam(bool Facing, bool VFacing, int32_t AlphaA, int32_t AlphaS, int32_t AlphaD, bool DummySpriteGroupNo, bool DummySpriteImageNo) noexcept {
+			[[nodiscard]] inline static constexpr int32_t EncodeAnimExtraParam(bool Facing, bool VFacing, int32_t AlphaA, int32_t AlphaS, int32_t AlphaD, bool DummySpriteGroupNo, bool DummySpriteImageNo) noexcept {
 				return kElemFacing.BitSet(Facing) | kElemVFacing.BitSet(VFacing) | 
 					kElemAlphaA.BitSet(AlphaA) | kElemAlphaS.BitSet(AlphaS) | kElemAlphaD.BitSet(AlphaD) | 
 					kDummySpriteGroupNo.BitSet(DummySpriteGroupNo) | kDummySpriteImageNo.BitSet(DummySpriteImageNo);
 			}
-			[[nodiscard]] static constexpr int32_t EncodeLoopStart(int32_t Elem, bool Exist) noexcept {
+			[[nodiscard]] inline static constexpr int32_t EncodeLoopStart(int32_t Elem, bool Exist) noexcept {
 				return kElemLoopStart.BitSet(Elem) | kExistLoopStart.BitSet(Exist);
 			}
 
-			[[nodiscard]] static constexpr int32_t DecodeSpriteGroupNo(int32_t SpriteNumber) noexcept { return kSpriteGroupNo.BitGet(SpriteNumber); }
-			[[nodiscard]] static constexpr int32_t DecodeSpriteImageNo(int32_t SpriteNumber) noexcept { return kSpriteImageNo.BitGet(SpriteNumber); }
-			[[nodiscard]] static constexpr int32_t DecodeElemFacing(int32_t ExtraParam) noexcept { return kElemFacing.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeElemVFacing(int32_t ExtraParam) noexcept { return kElemVFacing.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeElemAlphaA(int32_t ExtraParam) noexcept { return kElemAlphaA.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeElemAlphaS(int32_t ExtraParam) noexcept { return kElemAlphaS.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeElemAlphaD(int32_t ExtraParam) noexcept { return kElemAlphaD.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeDummySpriteGroupNo(int32_t ExtraParam) noexcept { return kDummySpriteGroupNo.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeDummySpriteImageNo(int32_t ExtraParam) noexcept { return kDummySpriteImageNo.BitGet(ExtraParam); }
-			[[nodiscard]] static constexpr int32_t DecodeElemLoopStart(int32_t LoopStart) noexcept { return kElemLoopStart.BitGet(LoopStart); }
-			[[nodiscard]] static constexpr int32_t DecodeExistLoopStart(int32_t LoopStart) noexcept { return kExistLoopStart.BitGet(LoopStart); }
+			[[nodiscard]] inline static constexpr int32_t DecodeSpriteGroupNo(int32_t SpriteNumber) noexcept { return kSpriteGroupNo.BitGet(SpriteNumber); }
+			[[nodiscard]] inline static constexpr int32_t DecodeSpriteImageNo(int32_t SpriteNumber) noexcept { return kSpriteImageNo.BitGet(SpriteNumber); }
+			[[nodiscard]] inline static constexpr int32_t DecodeElemFacing(int32_t ExtraParam) noexcept { return kElemFacing.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeElemVFacing(int32_t ExtraParam) noexcept { return kElemVFacing.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeElemAlphaA(int32_t ExtraParam) noexcept { return kElemAlphaA.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeElemAlphaS(int32_t ExtraParam) noexcept { return kElemAlphaS.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeElemAlphaD(int32_t ExtraParam) noexcept { return kElemAlphaD.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeDummySpriteGroupNo(int32_t ExtraParam) noexcept { return kDummySpriteGroupNo.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeDummySpriteImageNo(int32_t ExtraParam) noexcept { return kDummySpriteImageNo.BitGet(ExtraParam); }
+			[[nodiscard]] inline static constexpr int32_t DecodeElemLoopStart(int32_t LoopStart) noexcept { return kElemLoopStart.BitGet(LoopStart); }
+			[[nodiscard]] inline static constexpr int32_t DecodeExistLoopStart(int32_t LoopStart) noexcept { return kExistLoopStart.BitGet(LoopStart); }
 		};
 
 		struct T_CheckRange {
@@ -118,10 +118,10 @@ namespace SAELib {
 			// AIRデータ検索開始ディレクトリパス指定
 			// 
 
-			static constexpr int32_t kThrowError = 1 << 0;
-			static constexpr int32_t kCreateLogFile = 1 << 1;
-			static constexpr int32_t kCreateSAELibFile = 1 << 2;
-			static constexpr int32_t kDefaultConfig = 0;
+			inline static constexpr int32_t kThrowError = 1 << 0;
+			inline static constexpr int32_t kCreateLogFile = 1 << 1;
+			inline static constexpr int32_t kCreateSAELibFile = 1 << 2;
+			inline static constexpr int32_t kDefaultConfig = 0;
 
 			// SAELibファイルのパス
 			std::filesystem::path SAELibFilePath_ = {};
@@ -541,7 +541,7 @@ namespace SAELib {
 
 		struct T_ActionBegin {
 		private:
-			static constexpr int32_t kAnimNumberIndex = 1;
+			inline static constexpr int32_t kAnimNumberIndex = 1;
 
 			const std::smatch& kRegexMatch;
 			const int32_t kTextLineCount;
@@ -577,17 +577,17 @@ namespace SAELib {
 
 		struct T_AnimParam {
 		private:
-			static constexpr int32_t kGroupNoIndex = 1;
-			static constexpr int32_t kImageNoIndex = 2;
-			static constexpr int32_t kPosXIndex = 3;
-			static constexpr int32_t kPosYIndex = 4;
-			static constexpr int32_t kElemTimeIndex = 5;
-			static constexpr int32_t kFacingIndex = 6;
-			static constexpr int32_t kVFacingIndex = 7;
-			static constexpr int32_t kAlphaIndex = 8;
-			static constexpr int32_t kAlphaAValueIndex = 9;
-			static constexpr int32_t kAlphaSValueIndex = 11;
-			static constexpr int32_t kAlphaDValueIndex = 13;
+			inline static constexpr int32_t kGroupNoIndex = 1;
+			inline static constexpr int32_t kImageNoIndex = 2;
+			inline static constexpr int32_t kPosXIndex = 3;
+			inline static constexpr int32_t kPosYIndex = 4;
+			inline static constexpr int32_t kElemTimeIndex = 5;
+			inline static constexpr int32_t kFacingIndex = 6;
+			inline static constexpr int32_t kVFacingIndex = 7;
+			inline static constexpr int32_t kAlphaIndex = 8;
+			inline static constexpr int32_t kAlphaAValueIndex = 9;
+			inline static constexpr int32_t kAlphaSValueIndex = 11;
+			inline static constexpr int32_t kAlphaDValueIndex = 13;
 
 			const std::smatch& kRegexMatch;
 			const int32_t kTextLineCount;
