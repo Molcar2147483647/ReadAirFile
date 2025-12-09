@@ -424,7 +424,7 @@ namespace SAELib {
 			[[nodiscard]] bool empty() const noexcept { return Path_.empty(); }
 		};
 
-		// スプライトリストの画像番号の重複チェック＆存在確認
+		// アニメリストのアニメ番号の重複チェック＆存在確認
 		struct T_UnorderedMap {
 		private:
 			std::unordered_map<int32_t, int32_t> UnorderedMap = {};
@@ -1175,7 +1175,7 @@ namespace SAELib {
 			*
 			* 　読み込んだAIRデータの空かを判定します
 			*
-			* @return bool 判定結果 (false = データが空：true = データが存在)
+			* @return bool 判定結果 (false = データが存在：true = データが空)
 			*/
 			bool empty() const noexcept {
 				return FileName().empty() && AnimNumberUMap.empty() && AirAnimData.empty();
