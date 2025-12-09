@@ -91,7 +91,7 @@ AIRConfig::SetThrowErrorの設定がOFFの場合にエラー回避のために�
 ```
 air.GetAnimData(XXX).IsDummy(); // ダミーデータ判断
 ```
-戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ))  
+戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ)  
 
 ### アニメ番号の取得
 SAEで設定したアニメ番号を返します  
@@ -176,7 +176,7 @@ air.GetAnimData(XXX).GetElemData(YYY).PosY(); // アニメ番号XXXのYYY枚目�
 ```
 戻り値 int32_t PosY Y座標
 
-### フレーム表示時間座標の取得
+### フレーム表示時間の取得
 SAEで設定したフレーム表示時間を返します  
 ダミーデータの場合は 0 を返します  
 ```
@@ -238,16 +238,16 @@ SAELib::AIRConfig::GetThrowError(); // エラー出力切り替え設定を取�
 戻り値 bool (false = ログとして記録する：true = 例外を投げる)
 
 ### エラーログファイルを作成設定/取得
-このライブラリ関数で発生したエラーのログファイルを出力するかどうか指定できます  
+このライブラリ関数で発生したエラーのログファイルを作成するかどうか指定できます  
 ```
 SAELib::AIRConfig::SetCreateLogFile(bool flag); // エラーログファイルを作成設定
 ```
-引数1 bool (false = ログファイルを出力しない：true = ログファイルを出力する)  
+引数1 bool (false = ログファイルを作成しない：true = ログファイルを作成する)  
 戻り値 なし(void)  
 ```
 SAELib::AIRConfig::GetCreateLogFile(); // エラーログファイルを作成設定を取得  
 ```
-戻り値 bool (false = ログファイルを出力しない：true = ログファイルを出力する)    
+戻り値 bool (false = ログファイルを作成しない：true = ログファイルを作成する)  
 
 ### SAELibフォルダを作成設定/取得
 ファイルの出力先としてSAELibファイルを使用するかを指定できます  
@@ -260,7 +260,7 @@ SAELib::AIRConfig::SetCreateSAELibFile(bool flag, const std::string& Path = "");
 ```
 SAELib::AIRConfig::GetCreateSAELibFile(); // SAELibフォルダを作成設定を取得  
 ```
-戻り値 const std::string& CreateSAELibFile SAELibフォルダ作成先  
+戻り値 bool (false = SAELibファイルを使用しない：true = SAELibファイルを使用する)  
 
 ### SAELibフォルダのパス設定/取得
 SAELibファイルの作成パスを指定できます  
