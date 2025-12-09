@@ -142,7 +142,7 @@ AIRConfig::SetThrowErrorの設定がOFFの場合にエラー回避のために�
 ```
 air.GetAnimData(XXX).GetElemData(YYY).IsDummy(); // ダミーデータ判断
 ```
-戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ))  
+戻り値 bool 判定結果 (false = 自身が正常なデータ：true = 自身がダミーデータ)  
 
 ### グループ番号の取得
 SAEで設定したグループ番号を返します  
