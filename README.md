@@ -135,6 +135,48 @@ air.GetAnimData(XXX).GetElemData(YYY); // アニメ番号XXXのYYY枚数目の�
 戻り値1 対象が存在する GetElemData(index)のデータ  
 戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
+### AIRデータのサウンドグループ数を取得
+読み込んだAIRデータのサウンドグループ数を返します  
+```
+air.NumGroup(); // サウンドグループ数を取得
+```
+戻り値 int32_t NumGroup サウンドグループ数  
+
+### AIRデータのサウンド数を取得
+読み込んだAIRデータのサウンド数を返します  
+```
+air.NumItem(); // サウンド数を取得
+```
+戻り値 int32_t NumItem サウンド数  
+
+### AIRデータのファイル名を取得
+読み込んだAIRデータの拡張子を除いたファイル名を返します  
+```
+air.FileName(); // ファイル名を取得
+```
+戻り値 const std::string& FileName ファイル名  
+
+### AIRデータの初期化
+読み込んだAIRデータを初期化します  
+```
+air.clear(); // AIRデータの初期化
+```
+戻り値 なし(void)  
+
+### AIRデータの存在確認
+読み込んだAIRデータの空かを判定します  
+```
+air.empty(); // AIRデータの存在確認
+```
+戻り値 bool 判定結果 (false = データが存在：true = データが空)  
+
+### AIRデータのデータサイズを取得
+読み込んだAIRデータのデータサイズを返します  
+```
+air.size(); // AIRデータサイズを取得
+```
+戻り値 size_t AIRDataSize AIRデータサイズ 
+
 ## class SAELib::AIR::ElemData
 ### ダミーデータ判断
 自身がダミーデータであるかを確認します  
