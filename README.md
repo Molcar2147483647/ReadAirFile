@@ -135,19 +135,12 @@ air.GetAnimData(XXX).GetElemData(YYY); // アニメ番号XXXのYYY枚数目の�
 戻り値1 対象が存在する GetElemData(index)のデータ  
 戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
-### AIRデータのサウンドグループ数を取得
-読み込んだAIRデータのサウンドグループ数を返します  
+### AIRデータのアニメ数を取得
+読み込んだAIRデータのアニメ数を返します  
 ```
-air.NumGroup(); // サウンドグループ数を取得
+air.NumAnim(); // アニメ数を取得
 ```
-戻り値 int32_t NumGroup サウンドグループ数  
-
-### AIRデータのサウンド数を取得
-読み込んだAIRデータのサウンド数を返します  
-```
-air.NumItem(); // サウンド数を取得
-```
-戻り値 int32_t NumItem サウンド数  
+戻り値 int32_t NumAnim アニメ数  
 
 ### AIRデータのファイル名を取得
 読み込んだAIRデータの拡張子を除いたファイル名を返します  
