@@ -283,7 +283,7 @@ SAELib::AIRConfig::SetAIRSearchPath(const std::string& Path = ""); // AIRファ�
 引数1 const std::string& AIRSearchPath AIRファイルの検索先のパス  
 戻り値 なし(void)  
 ```
-SAELib::AIRConfig::GetSFFSearchPath(); // SFFファイルの検索パス取得  
+SAELib::AIRConfig::GetAIRSearchPath(); // AIRファイルの検索パス取得  
 ```
 戻り値 const std::string& AIRSearchPath AIRファイルの検索先のパス  
 
