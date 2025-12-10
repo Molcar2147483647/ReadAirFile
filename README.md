@@ -441,8 +441,8 @@ int main()
 	// アニメ番号5150が存在するか確認
 	if (air.ExistAnimNumber(5150)) {
 		// アニメ番号5150の1枚目の画像番号を取得
-		air.GetAnimData(5150).GetElemData(1).GroupNo();
-		air.GetAnimData(5150).GetElemData(1).ImageNo();
+		air.GetAnimData(5150).GetElemData(0).GroupNo();
+		air.GetAnimData(5150).GetElemData(0).ImageNo();
 	}
 
 	// すべてのアニメ情報を出力
