@@ -2,13 +2,16 @@
 #define INCLUDEGUARD_READAIRFILE_HEADER
 
 #include <stdint.h>			// uint32_tとかのやつ
+#include <string>			// string系のやつ
+#include <string_view>		// std::string_viewのやつ
+#include <stdexcept>		// runtime_errorのやつ
 #include <fstream>			// ファイル読み取り
 #include <filesystem>		// ファイル検索
+#include <system_error>		// std::error_codeのやつ
 #include <vector>			// 可変長配列
 #include <unordered_map>	// ハッシュ的なやつ
 #include <regex>			// 正規表現
 #include <charconv>			// 文字列数字変換のやつ
-#include <system_error>		// std::errcのやつ
 #include <limits>			// std::numeric_limitsのやつ
 
 namespace SAELib {
@@ -1232,7 +1235,7 @@ namespace SAELib {
 			* @retval 対象が存在する AnimData
 			* @retval 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)
 			*/
-			const AnimData GetAnimData(int32_t AnimNumber) {
+			AnimData GetAnimData(int32_t AnimNumber) {
 				if (int32_t Value = AnimNumberUMap.find(AnimNumber); Value >= 0) { // SpriteExist(GroupNo, ImageNo)と同義
 					return AnimData(&AirAnimData, Value);
 				}
@@ -1265,7 +1268,7 @@ namespace SAELib {
 			* @retval 対象が存在する AnimData
 			* @retval 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)
 			*/
-			const AnimData GetAnimDataIndex(int32_t index) const {
+			AnimData GetAnimDataIndex(int32_t index) const {
 				if (ExistAnimDataIndex(index)) {
 					return AnimData(&AirAnimData, index);
 				}
