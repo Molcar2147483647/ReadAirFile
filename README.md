@@ -84,6 +84,41 @@ air.GetAnimDataIndex(0); // 0番目のデータを取得
 戻り値1 対象が存在する GetAnimDataIndex(index)のデータ  
 戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
 
+### AIRデータのアニメ数を取得
+読み込んだAIRデータのアニメ数を返します  
+```
+air.NumAnim(); // アニメ数を取得
+```
+戻り値 int32_t NumAnim アニメ数  
+
+### AIRデータのファイル名を取得
+読み込んだAIRデータの拡張子を除いたファイル名を返します  
+```
+air.FileName(); // ファイル名を取得
+```
+戻り値 const std::string& FileName ファイル名  
+
+### AIRデータの初期化
+読み込んだAIRデータを初期化します  
+```
+air.clear(); // AIRデータの初期化
+```
+戻り値 なし(void)  
+
+### AIRデータの存在確認
+読み込んだAIRデータの空かを判定します  
+```
+air.empty(); // AIRデータの存在確認
+```
+戻り値 bool 判定結果 (false = データが存在：true = データが空)  
+
+### AIRデータのデータサイズを取得
+読み込んだAIRデータのデータサイズを返します  
+```
+air.size(); // AIRデータサイズを取得
+```
+戻り値 size_t AIRDataSize AIRデータサイズ 
+
 ## class SAELib::AIR::AnimData
 ### ダミーデータ判断
 自身がダミーデータであるかを確認します  
@@ -134,41 +169,6 @@ air.GetAnimData(XXX).GetElemData(YYY); // アニメ番号XXXのYYY枚数目の�
 引数1 int32_t index データ配列インデックス  
 戻り値1 対象が存在する GetElemData(index)のデータ  
 戻り値2 対象が存在しない AIRConfig::SetThrowError (false = ダミーデータの参照：true = 例外を投げる)  
-
-### AIRデータのアニメ数を取得
-読み込んだAIRデータのアニメ数を返します  
-```
-air.NumAnim(); // アニメ数を取得
-```
-戻り値 int32_t NumAnim アニメ数  
-
-### AIRデータのファイル名を取得
-読み込んだAIRデータの拡張子を除いたファイル名を返します  
-```
-air.FileName(); // ファイル名を取得
-```
-戻り値 const std::string& FileName ファイル名  
-
-### AIRデータの初期化
-読み込んだAIRデータを初期化します  
-```
-air.clear(); // AIRデータの初期化
-```
-戻り値 なし(void)  
-
-### AIRデータの存在確認
-読み込んだAIRデータの空かを判定します  
-```
-air.empty(); // AIRデータの存在確認
-```
-戻り値 bool 判定結果 (false = データが存在：true = データが空)  
-
-### AIRデータのデータサイズを取得
-読み込んだAIRデータのデータサイズを返します  
-```
-air.size(); // AIRデータサイズを取得
-```
-戻り値 size_t AIRDataSize AIRデータサイズ 
 
 ## class SAELib::AIR::ElemData
 ### ダミーデータ判断
@@ -430,7 +430,7 @@ SAELib::AIRError::ErrorMessage(ErrorID); // ErrorIDのエラーメッセージ�
 int main()
 {
 	SAELib::AIRConfig::SetThrowError(false);		// このライブラリで発生したエラーを例外として処理しない
-	SAELib::AIRConfig::SetCreateSAELibFile(false);	// SAELibファイルの作成を許可する
+	SAELib::AIRConfig::SetCreateSAELibFile(false);	// SAELibファイルの作成を許可しない
 	SAELib::AIRConfig::SetSAELibFilePath();			// SAELibファイルの作成階層を指定
 	SAELib::AIRConfig::SetCreateLogFile(false);		// このライブラリで発生したエラーログの作成を許可する
 	SAELib::AIRConfig::SetAIRSearchPath("../../");	// AIRファイルの検索開始階層を指定
